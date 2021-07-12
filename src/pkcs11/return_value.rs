@@ -110,6 +110,13 @@ impl TryFrom<c_ulong> for ReturnValue {
     }
 }
 
+impl TryFrom<ReturnValue> for u32 {
+    type Error = ();
+    fn try_from(value: ReturnValue) -> Result<Self, Self::Error> {
+        ReturnValue::to_u32(&value).ok_or(())
+    }
+}
+
 impl TryFrom<ReturnValue> for u64 {
     type Error = ();
     fn try_from(value: ReturnValue) -> Result<Self, Self::Error> {
