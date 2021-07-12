@@ -53,11 +53,11 @@ pub enum KeyType {
 impl TryFrom<c_ulong> for KeyType {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        KeyType::from_u64(value).ok_or(())
+        KeyType::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<KeyType> for c_ulong {
+impl TryFrom<KeyType> for u64 {
     type Error = ();
     fn try_from(value: KeyType) -> Result<Self, Self::Error> {
         KeyType::to_u64(&value).ok_or(())

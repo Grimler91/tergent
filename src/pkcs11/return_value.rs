@@ -106,11 +106,11 @@ pub enum ReturnValue {
 impl TryFrom<c_ulong> for ReturnValue {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        ReturnValue::from_u64(value).ok_or(())
+        ReturnValue::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<ReturnValue> for c_ulong {
+impl TryFrom<ReturnValue> for u64 {
     type Error = ();
     fn try_from(value: ReturnValue) -> Result<Self, Self::Error> {
         ReturnValue::to_u64(&value).ok_or(())

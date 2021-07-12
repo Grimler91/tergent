@@ -117,11 +117,11 @@ pub enum AttributeType {
 impl TryFrom<c_ulong> for AttributeType {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        AttributeType::from_u64(value).ok_or(())
+        AttributeType::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<AttributeType> for c_ulong {
+impl TryFrom<AttributeType> for u64 {
     type Error = ();
     fn try_from(value: AttributeType) -> Result<Self, Self::Error> {
         AttributeType::to_u64(&value).ok_or(())

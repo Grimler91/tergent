@@ -19,11 +19,11 @@ pub enum PseudoRandomFunction {
 impl TryFrom<c_ulong> for PseudoRandomFunction {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        PseudoRandomFunction::from_u64(value).ok_or(())
+        PseudoRandomFunction::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<PseudoRandomFunction> for c_ulong {
+impl TryFrom<PseudoRandomFunction> for u64 {
     type Error = ();
     fn try_from(value: PseudoRandomFunction) -> Result<Self, Self::Error> {
         PseudoRandomFunction::to_u64(&value).ok_or(())

@@ -31,11 +31,11 @@ pub enum Param {
 impl TryFrom<c_ulong> for Format {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        Format::from_u64(value).ok_or(())
+        Format::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<Format> for c_ulong {
+impl TryFrom<Format> for u64 {
     type Error = ();
     fn try_from(value: Format) -> Result<Self, Self::Error> {
         Format::to_u64(&value).ok_or(())
@@ -45,11 +45,11 @@ impl TryFrom<Format> for c_ulong {
 impl TryFrom<c_ulong> for Param {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        Param::from_u64(value).ok_or(())
+        Param::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<Param> for c_ulong {
+impl TryFrom<Param> for u64 {
     type Error = ();
     fn try_from(value: Param) -> Result<Self, Self::Error> {
         Param::to_u64(&value).ok_or(())

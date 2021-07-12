@@ -20,11 +20,11 @@ pub enum KeyDerivationFunction {
 impl TryFrom<c_ulong> for KeyDerivationFunction {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        KeyDerivationFunction::from_u64(value).ok_or(())
+        KeyDerivationFunction::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<KeyDerivationFunction> for c_ulong {
+impl TryFrom<KeyDerivationFunction> for u64 {
     type Error = ();
     fn try_from(value: KeyDerivationFunction) -> Result<Self, Self::Error> {
         KeyDerivationFunction::to_u64(&value).ok_or(())

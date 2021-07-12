@@ -16,11 +16,11 @@ pub enum SessionState {
 impl TryFrom<c_ulong> for SessionState {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        SessionState::from_u64(value).ok_or(())
+        SessionState::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<SessionState> for c_ulong {
+impl TryFrom<SessionState> for u64 {
     type Error = ();
     fn try_from(value: SessionState) -> Result<Self, Self::Error> {
         SessionState::to_u64(&value).ok_or(())

@@ -21,11 +21,11 @@ pub enum ObjectClass {
 impl TryFrom<c_ulong> for ObjectClass {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        ObjectClass::from_u64(value).ok_or(())
+        ObjectClass::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<ObjectClass> for c_ulong {
+impl TryFrom<ObjectClass> for u64 {
     type Error = ();
     fn try_from(value: ObjectClass) -> Result<Self, Self::Error> {
         ObjectClass::to_u64(&value).ok_or(())

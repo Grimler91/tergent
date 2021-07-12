@@ -15,11 +15,11 @@ pub enum HardwareFeatureType {
 impl TryFrom<c_ulong> for HardwareFeatureType {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        HardwareFeatureType::from_u64(value).ok_or(())
+        HardwareFeatureType::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<HardwareFeatureType> for c_ulong {
+impl TryFrom<HardwareFeatureType> for u64 {
     type Error = ();
     fn try_from(value: HardwareFeatureType) -> Result<Self, Self::Error> {
         HardwareFeatureType::to_u64(&value).ok_or(())

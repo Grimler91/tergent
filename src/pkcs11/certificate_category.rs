@@ -15,11 +15,11 @@ pub enum CertificateCategory {
 impl TryFrom<c_ulong> for CertificateCategory {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        CertificateCategory::from_u64(value).ok_or(())
+        CertificateCategory::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<CertificateCategory> for c_ulong {
+impl TryFrom<CertificateCategory> for u64 {
     type Error = ();
     fn try_from(value: CertificateCategory) -> Result<Self, Self::Error> {
         CertificateCategory::to_u64(&value).ok_or(())

@@ -4,6 +4,7 @@
 
 use std::convert::TryInto;
 use std::slice;
+use std::os::raw::c_ulong;
 
 pub const CRYPTOKI_VERSION_MAJOR: u32 = 2;
 pub const CRYPTOKI_VERSION_MINOR: u32 = 40;
@@ -59,7 +60,7 @@ impl Attribute {
     /// As attribute does not own the value field (instead it contains a pointer)
     /// any safety considerations regarding pointers apply.
     pub fn set_value(&mut self, value: &[u8]) -> Option<()> {
-        let len: u64 = value.len().try_into().ok()?;
+        let len: c_ulong = value.len().try_into().ok()?;
         if self.value.is_null() {
             self.value_len = len;
             return Some(());

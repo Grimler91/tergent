@@ -16,11 +16,11 @@ pub enum MaskGenerationFunction {
 impl TryFrom<c_ulong> for MaskGenerationFunction {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        MaskGenerationFunction::from_u64(value).ok_or(())
+        MaskGenerationFunction::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<MaskGenerationFunction> for c_ulong {
+impl TryFrom<MaskGenerationFunction> for u64 {
     type Error = ();
     fn try_from(value: MaskGenerationFunction) -> Result<Self, Self::Error> {
         MaskGenerationFunction::to_u64(&value).ok_or(())

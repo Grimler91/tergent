@@ -335,11 +335,11 @@ pub enum MechanismType {
 impl TryFrom<c_ulong> for MechanismType {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        MechanismType::from_u64(value).ok_or(())
+        MechanismType::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<MechanismType> for c_ulong {
+impl TryFrom<MechanismType> for u64 {
     type Error = ();
     fn try_from(value: MechanismType) -> Result<Self, Self::Error> {
         MechanismType::to_u64(&value).ok_or(())

@@ -15,11 +15,11 @@ pub enum CertificateType {
 impl TryFrom<c_ulong> for CertificateType {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        CertificateType::from_u64(value).ok_or(())
+        CertificateType::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<CertificateType> for c_ulong {
+impl TryFrom<CertificateType> for u64 {
     type Error = ();
     fn try_from(value: CertificateType) -> Result<Self, Self::Error> {
         CertificateType::to_u64(&value).ok_or(())

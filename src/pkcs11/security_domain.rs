@@ -15,11 +15,11 @@ pub enum SecurityDomain {
 impl TryFrom<c_ulong> for SecurityDomain {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        SecurityDomain::from_u64(value).ok_or(())
+        SecurityDomain::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<SecurityDomain> for c_ulong {
+impl TryFrom<SecurityDomain> for u64 {
     type Error = ();
     fn try_from(value: SecurityDomain) -> Result<Self, Self::Error> {
         SecurityDomain::to_u64(&value).ok_or(())

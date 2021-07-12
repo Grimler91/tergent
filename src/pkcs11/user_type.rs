@@ -14,11 +14,11 @@ pub enum UserType {
 impl TryFrom<c_ulong> for UserType {
     type Error = ();
     fn try_from(value: c_ulong) -> Result<Self, Self::Error> {
-        UserType::from_u64(value).ok_or(())
+        UserType::from_u64(value.into()).ok_or(())
     }
 }
 
-impl TryFrom<UserType> for c_ulong {
+impl TryFrom<UserType> for u64 {
     type Error = ();
     fn try_from(value: UserType) -> Result<Self, Self::Error> {
         UserType::to_u64(&value).ok_or(())
